@@ -1,0 +1,41 @@
+/* ── PROJECTS ── */
+#projects { background: var(--off-white); }
+.projects-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; flex-wrap: wrap; gap: 1rem;
+}
+.company-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+.company-tag {
+    background: var(--white); border: 1px solid var(--gold-200);
+    padding: 0.45rem 1rem; border-radius: 100px; font-size: 0.85rem;
+    font-weight: 600; color: var(--gold-700); letter-spacing: 0.01em; transition: all 0.2s;
+}
+.company-tag:hover { background: var(--gold-100); border-color: var(--gold-400); }
+.projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem; margin-top: 2.5rem;
+}
+.project-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; transition: all 0.3s;
+}
+.project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.project-card-image {
+    width: 100%; height: 220px; object-fit: cover; display: block; background: var(--gold-100);
+}
+.project-card-image-placeholder {
+    width: 100%; height: 220px;
+    background: linear-gradient(135deg, var(--gold-100) 0%, var(--gold-200) 100%);
+    display: flex; align-items: center; justify-content: center; font-size: 2.5rem;
+}
+.project-card-body { padding: 1.5rem; }
+.project-card-tag {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold-500); margin-bottom: 0.5rem;
+}
+.project-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    font-weight: 600; margin-bottom: 0.5rem;
+}
+.project-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+@media (max-width: 900px) { .projects-grid { grid-template-columns: 1fr; } }

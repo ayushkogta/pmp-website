@@ -1,0 +1,24 @@
+/* ══════════════════════════════════════
+   VARIABLES & DESIGN TOKENS
+   ══════════════════════════════════════ */
+:root {
+    --gold-50: #FFFDF5;
+    --gold-100: #FFF9E6;
+    --gold-200: #FFF0C2;
+    --gold-300: #FFE49E;
+    --gold-400: #D4A843;
+    --gold-500: #C49A2F;
+    --gold-600: #A07D25;
+    --gold-700: #7A5F1C;
+    --gold-800: #544114;
+    --white: #FFFFFF;
+    --off-white: #FDFCF9;
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-light: #6B6B6B;
+    --border: #E8E0D0;
+    --shadow-sm: 0 1px 3px rgba(196, 154, 47, 0.06);
+    --shadow-md: 0 4px 16px rgba(196, 154, 47, 0.08);
+    --shadow-lg: 0 8px 32px rgba(196, 154, 47, 0.12);
+    --shadow-xl: 0 16px 48px rgba(196, 154, 47, 0.15);
+}

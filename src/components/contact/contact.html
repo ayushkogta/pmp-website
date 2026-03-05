@@ -1,0 +1,71 @@
+<section id="contact">
+    <div class="section-inner">
+        <div class="contact-grid">
+            <div class="reveal">
+                <div class="section-label">Get in Touch</div>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Whether you're a student interested in joining, an industry professional looking to partner, or just curious about what we do — we'd love to hear from you.</p>
+
+                <div class="contact-methods">
+                    <a href="mailto:projectmanagementpurdue@gmail.com" class="contact-method">
+                        <div class="contact-method-icon">&#9993;</div>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>projectmanagementpurdue@gmail.com</p>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/company/project-management-at-purdue/" target="_blank" rel="noopener" class="contact-method">
+                        <div class="contact-method-icon">&#128101;</div>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <p>Follow us on LinkedIn</p>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/pmp_purdue/" target="_blank" rel="noopener" class="contact-method">
+                        <div class="contact-method-icon">&#128247;</div>
+                        <div>
+                            <h4>Instagram</h4>
+                            <p>@pmp_purdue</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-form reveal">
+                <h3>Send a Message</h3>
+                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">I am a...</label>
+                        <select id="role" name="role">
+                            <option value="student">Purdue Student</option>
+                            <option value="industry">Industry Professional</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message &rarr;</button>
+                    <div class="form-success" id="formSuccess">
+                        &#10003; Thanks for reaching out! We'll get back to you soon.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,29 @@
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-mark">PMP</div>
+            <span class="nav-logo-text">Project Management at Purdue</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#recruitment">Recruitment</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#recruitment" class="nav-cta">Apply Now</a></li>
+        </ul>
+        <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" onclick="closeMobileMenu(event)">
+    <div class="mobile-menu-panel" onclick="event.stopPropagation()">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&#10005;</button>
+        <a href="#about" onclick="toggleMobileMenu()">About</a>
+        <a href="#projects" onclick="toggleMobileMenu()">Projects</a>
+        <a href="#recruitment" onclick="toggleMobileMenu()">Recruitment</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        <a href="#recruitment" onclick="toggleMobileMenu()" class="btn btn-primary" style="text-align:center;margin-top:1rem;">Apply Now</a>
+    </div>
+</div>

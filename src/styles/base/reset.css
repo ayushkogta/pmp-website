@@ -1,0 +1,12 @@
+/* ══════════════════════════════════════
+   RESET & GLOBAL DEFAULTS
+   ══════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-primary);
+    background: var(--off-white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}

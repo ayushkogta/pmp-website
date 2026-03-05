@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management at Purdue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ══════════════════════════════════════
+   VARIABLES & DESIGN TOKENS
+   ══════════════════════════════════════ */
+:root {
+    --gold-50: #FFFDF5;
+    --gold-100: #FFF9E6;
+    --gold-200: #FFF0C2;
+    --gold-300: #FFE49E;
+    --gold-400: #D4A843;
+    --gold-500: #C49A2F;
+    --gold-600: #A07D25;
+    --gold-700: #7A5F1C;
+    --gold-800: #544114;
+    --white: #FFFFFF;
+    --off-white: #FDFCF9;
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-light: #6B6B6B;
+    --border: #E8E0D0;
+    --shadow-sm: 0 1px 3px rgba(196, 154, 47, 0.06);
+    --shadow-md: 0 4px 16px rgba(196, 154, 47, 0.08);
+    --shadow-lg: 0 8px 32px rgba(196, 154, 47, 0.12);
+    --shadow-xl: 0 16px 48px rgba(196, 154, 47, 0.15);
+}
+
+
+/* ══════════════════════════════════════
+   RESET & GLOBAL DEFAULTS
+   ══════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-primary);
+    background: var(--off-white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* ══════════════════════════════════════
+   SHARED UTILITIES & COMPONENTS
+   ══════════════════════════════════════ */
+
+/* Layout */
+section { padding: 6rem 2rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+
+/* Section headings */
+.section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold-500); margin-bottom: 0.75rem;
+}
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 700;
+    line-height: 1.15; letter-spacing: -0.02em; color: var(--text-primary);
+}
+.section-subtitle {
+    font-size: 1.05rem; color: var(--text-secondary);
+    margin-top: 1rem; max-width: 560px; line-height: 1.7;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.75rem; border-radius: 8px; font-weight: 600;
+    font-size: 0.95rem; text-decoration: none; transition: all 0.25s;
+    cursor: pointer; border: none; font-family: inherit; letter-spacing: 0.01em;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+    color: white; box-shadow: 0 2px 8px rgba(196, 154, 47, 0.25);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196, 154, 47, 0.35);
+}
+.btn-outline {
+    background: var(--white); color: var(--text-primary);
+    border: 1.5px solid var(--border);
+}
+.btn-outline:hover {
+    border-color: var(--gold-400); color: var(--gold-600); background: var(--gold-50);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+.reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Form elements */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label {
+    display: block; font-size: 0.82rem; font-weight: 600;
+    color: var(--text-secondary); margin-bottom: 0.4rem; letter-spacing: 0.02em;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%; padding: 0.7rem 1rem; border: 1.5px solid var(--border);
+    border-radius: 8px; font-family: inherit; font-size: 0.92rem;
+    background: var(--off-white); transition: all 0.2s; color: var(--text-primary);
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none; border-color: var(--gold-400);
+    box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.12); background: var(--white);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-success {
+    background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46;
+    padding: 1rem; border-radius: 8px; font-size: 0.9rem; display: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+    section { padding: 4rem 1.25rem; }
+}
+
+
+/* ── NAV ── */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: var(--shadow-md); }
+.nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between; height: 72px;
+}
+.nav-logo {
+    display: flex; align-items: center; gap: 0.75rem;
+    text-decoration: none; color: var(--text-primary);
+}
+.nav-logo-mark {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem;
+    color: white; letter-spacing: -0.5px;
+}
+.nav-logo-text {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    font-size: 1.1rem; letter-spacing: -0.3px;
+}
+.nav-links {
+    display: flex; align-items: center; gap: 0.25rem; list-style: none;
+}
+.nav-links a {
+    text-decoration: none; color: var(--text-secondary); font-weight: 500;
+    font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 6px;
+    transition: all 0.2s; letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: var(--gold-600); background: var(--gold-100); }
+.nav-cta {
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-500)) !important;
+    color: white !important; padding: 0.5rem 1.25rem !important; font-weight: 600 !important;
+}
+.nav-cta:hover {
+    background: linear-gradient(135deg, var(--gold-500), var(--gold-600)) !important;
+    color: white !important; transform: translateY(-1px); box-shadow: var(--shadow-md);
+}
+.hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--text-primary); border-radius: 2px; transition: all 0.3s;
+}
+.mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+}
+.mobile-menu.open { display: block; }
+.mobile-menu-panel {
+    position: absolute; top: 0; right: 0;
+    width: min(320px, 85vw); height: 100%; background: var(--white);
+    padding: 2rem; box-shadow: var(--shadow-xl);
+    display: flex; flex-direction: column; gap: 0.25rem;
+    animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+    from { transform: translateX(100%); } to { transform: translateX(0); }
+}
+.mobile-menu-close {
+    align-self: flex-end; background: none; border: none;
+    font-size: 1.5rem; cursor: pointer; padding: 0.5rem; color: var(--text-primary);
+}
+.mobile-menu-panel a {
+    display: block; padding: 0.85rem 1rem; text-decoration: none;
+    color: var(--text-primary); font-weight: 500; font-size: 1.05rem;
+    border-radius: 8px; transition: background 0.2s;
+}
+.mobile-menu-panel a:hover { background: var(--gold-50); }
+
+@media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+}
+@media (max-width: 600px) {
+    .nav-inner { padding: 0 1.25rem; }
+}
+
+
+/* ── HERO ── */
+.hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    background: linear-gradient(165deg, var(--white) 0%, var(--gold-50) 40%, var(--gold-100) 100%);
+}
+.hero::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(212,168,67,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+}
+.hero::after {
+    content: ''; position: absolute; bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212,168,67,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+}
+.hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(212,168,67,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,67,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+}
+.hero-inner {
+    max-width: 1200px; margin: 0 auto; padding: 8rem 2rem 4rem;
+    position: relative; z-index: 1;
+}
+.hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--white); border: 1px solid var(--gold-200);
+    padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem;
+    font-weight: 600; color: var(--gold-600); letter-spacing: 0.05em;
+    text-transform: uppercase; margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm); animation: fadeInUp 0.8s ease both;
+}
+.hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--gold-400); border-radius: 50%;
+}
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem); font-weight: 700;
+    line-height: 1.1; letter-spacing: -0.02em; color: var(--text-primary);
+    max-width: 800px; animation: fadeInUp 0.8s ease 0.1s both;
+}
+.hero h1 em { font-style: italic; color: var(--gold-500); }
+.hero-description {
+    font-size: 1.15rem; line-height: 1.75; color: var(--text-secondary);
+    max-width: 620px; margin-top: 1.5rem; font-weight: 400;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+.hero-actions {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+.hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+.hero-stat { text-align: left; }
+.hero-stat-number {
+    font-family: 'Playfair Display', serif; font-size: 2rem;
+    font-weight: 700; color: var(--gold-500);
+}
+.hero-stat-label {
+    font-size: 0.8rem; font-weight: 500; color: var(--text-light);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.15rem;
+}
+@media (max-width: 900px) { .hero-stats { gap: 2rem; } }
+@media (max-width: 600px) {
+    .hero-inner { padding: 6rem 1.25rem 3rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero-stats { flex-direction: column; gap: 1rem; }
+}
+
+
+/* ── ABOUT ── */
+#about { background: var(--white); }
+.about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    margin-top: 3rem; align-items: center;
+}
+.about-text p {
+    color: var(--text-secondary); line-height: 1.8;
+    margin-bottom: 1.25rem; font-size: 1.05rem;
+}
+.about-image-wrap { position: relative; }
+.about-image-wrap img {
+    width: 100%; border-radius: 12px; box-shadow: var(--shadow-lg);
+}
+.about-image-accent {
+    position: absolute; bottom: -16px; right: -16px;
+    width: 120px; height: 120px; border: 3px solid var(--gold-300);
+    border-radius: 12px; z-index: -1;
+}
+.features-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; margin-top: 3.5rem;
+}
+.feature-card {
+    background: var(--gold-50); border: 1px solid var(--gold-200);
+    border-radius: 12px; padding: 2rem; transition: all 0.3s;
+}
+.feature-card:hover {
+    transform: translateY(-4px); box-shadow: var(--shadow-lg);
+    border-color: var(--gold-300);
+}
+.feature-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--gold-200), var(--gold-300));
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1.25rem;
+}
+.feature-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem;
+    font-weight: 600; margin-bottom: 0.6rem; color: var(--text-primary);
+}
+.feature-card p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.65; }
+@media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .features-row { grid-template-columns: 1fr; }
+}
+
+
+/* ── PROJECTS ── */
+#projects { background: var(--off-white); }
+.projects-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; flex-wrap: wrap; gap: 1rem;
+}
+.company-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+.company-tag {
+    background: var(--white); border: 1px solid var(--gold-200);
+    padding: 0.45rem 1rem; border-radius: 100px; font-size: 0.85rem;
+    font-weight: 600; color: var(--gold-700); letter-spacing: 0.01em; transition: all 0.2s;
+}
+.company-tag:hover { background: var(--gold-100); border-color: var(--gold-400); }
+.projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem; margin-top: 2.5rem;
+}
+.project-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; transition: all 0.3s;
+}
+.project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.project-card-image {
+    width: 100%; height: 220px; object-fit: cover; display: block; background: var(--gold-100);
+}
+.project-card-image-placeholder {
+    width: 100%; height: 220px;
+    background: linear-gradient(135deg, var(--gold-100) 0%, var(--gold-200) 100%);
+    display: flex; align-items: center; justify-content: center; font-size: 2.5rem;
+}
+.project-card-body { padding: 1.5rem; }
+.project-card-tag {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold-500); margin-bottom: 0.5rem;
+}
+.project-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    font-weight: 600; margin-bottom: 0.5rem;
+}
+.project-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+@media (max-width: 900px) { .projects-grid { grid-template-columns: 1fr; } }
+
+
+/* ── RECRUITMENT ── */
+#recruitment { background: var(--white); }
+.recruitment-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    margin-top: 3rem; align-items: start;
+}
+.recruitment-info h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem; margin-bottom: 1rem;
+}
+.recruitment-info p {
+    color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.5rem; font-size: 1rem;
+}
+.recruitment-status {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1rem; border-radius: 100px;
+    font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem;
+}
+.status-open { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.status-closed { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s ease infinite; }
+.status-open .status-dot { background: #10b981; }
+.status-closed .status-dot { background: #ef4444; animation: none; }
+.form-links { display: flex; flex-direction: column; gap: 1rem; }
+.form-link-card {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--gold-50); border: 1px solid var(--gold-200);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+    text-decoration: none; color: var(--text-primary); transition: all 0.25s;
+}
+.form-link-card:hover {
+    background: var(--gold-100); border-color: var(--gold-400); transform: translateX(4px);
+}
+.form-link-card-info h4 { font-weight: 600; font-size: 0.95rem; }
+.form-link-card-info p { font-size: 0.82rem; color: var(--text-light); margin-bottom: 0; }
+.form-link-arrow { font-size: 1.2rem; color: var(--gold-500); transition: transform 0.2s; }
+.form-link-card:hover .form-link-arrow { transform: translateX(4px); }
+.recruitment-sidebar {
+    background: var(--gold-50); border: 1px solid var(--gold-200);
+    border-radius: 14px; padding: 2.5rem;
+}
+.recruitment-sidebar h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.75rem;
+}
+.recruitment-sidebar p {
+    color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem;
+}
+.timeline { position: relative; padding-left: 1.5rem; margin-top: 1.5rem; }
+.timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--gold-300);
+}
+.timeline-item { position: relative; margin-bottom: 1.5rem; }
+.timeline-item::before {
+    content: ''; position: absolute; left: -1.5rem; top: 0.35rem;
+    width: 10px; height: 10px; background: var(--gold-400);
+    border-radius: 50%; border: 2px solid var(--gold-50); transform: translateX(-4px);
+}
+.timeline-item h4 { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+.timeline-item p { font-size: 0.82rem !important; color: var(--text-light) !important; margin-bottom: 0 !important; }
+@media (max-width: 900px) { .recruitment-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+
+/* ── CONTACT ── */
+#contact {
+    background: linear-gradient(165deg, var(--gold-50) 0%, var(--gold-100) 100%);
+}
+.contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem;
+}
+.contact-methods { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem; }
+.contact-method {
+    display: flex; align-items: center; gap: 1rem; padding: 1.25rem;
+    background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+    text-decoration: none; color: var(--text-primary); transition: all 0.25s;
+}
+.contact-method:hover {
+    border-color: var(--gold-400); box-shadow: var(--shadow-md); transform: translateY(-2px);
+}
+.contact-method-icon {
+    width: 44px; height: 44px; background: var(--gold-100); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+}
+.contact-method h4 { font-size: 0.9rem; font-weight: 600; }
+.contact-method p { font-size: 0.82rem; color: var(--text-light); }
+.contact-form {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2.5rem; box-shadow: var(--shadow-md);
+}
+.contact-form h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1.5rem;
+}
+.contact-form .btn { width: 100%; justify-content: center; margin-top: 0.5rem; }
+@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+
+/* ── FOOTER ── */
+footer {
+    background: var(--text-primary); color: rgba(255,255,255,0.7);
+    padding: 3.5rem 2rem 2rem;
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 2rem; padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-brand .nav-logo-mark { background: rgba(212,168,67,0.2); color: var(--gold-400); }
+.footer-brand .nav-logo-text { color: white; }
+.footer-brand p { margin-top: 0.75rem; font-size: 0.88rem; max-width: 320px; line-height: 1.6; }
+.footer-links-group h4 {
+    color: white; font-size: 0.82rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem;
+}
+.footer-links-group a {
+    display: block; color: rgba(255,255,255,0.6); text-decoration: none;
+    font-size: 0.88rem; padding: 0.25rem 0; transition: color 0.2s;
+}
+.footer-links-group a:hover { color: var(--gold-400); }
+.footer-socials { display: flex; gap: 0.75rem; margin-top: 1rem; }
+.footer-social {
+    width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem;
+    transition: all 0.2s;
+}
+.footer-social:hover {
+    border-color: var(--gold-400); color: var(--gold-400);
+    background: rgba(212,168,67,0.1);
+}
+.footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 1.5rem; font-size: 0.8rem; flex-wrap: wrap; gap: 0.5rem;
+}
+@media (max-width: 900px) { .footer-top { flex-direction: column; } }
+
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-mark">PMP</div>
+            <span class="nav-logo-text">Project Management at Purdue</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#recruitment">Recruitment</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#recruitment" class="nav-cta">Apply Now</a></li>
+        </ul>
+        <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" onclick="closeMobileMenu(event)">
+    <div class="mobile-menu-panel" onclick="event.stopPropagation()">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">&#10005;</button>
+        <a href="#about" onclick="toggleMobileMenu()">About</a>
+        <a href="#projects" onclick="toggleMobileMenu()">Projects</a>
+        <a href="#recruitment" onclick="toggleMobileMenu()">Recruitment</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        <a href="#recruitment" onclick="toggleMobileMenu()" class="btn btn-primary" style="text-align:center;margin-top:1rem;">Apply Now</a>
+    </div>
+</div>
+
+
+<section class="hero" id="home">
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+        <div class="hero-badge">Purdue University Student Organization</div>
+        <h1>Real Projects.<br>Real <em>Impact.</em></h1>
+        <p class="hero-description">
+            Project Management at Purdue was founded to cultivate essential project management skills while showcasing the diverse career paths and opportunities available within the field. Members gain real-world experience by leading and collaborating on teams to develop solutions, recommendations, and products for a wide range of companies.
+        </p>
+        <div class="hero-actions">
+            <a href="#recruitment" class="btn btn-primary">Apply to PMP &rarr;</a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-number">6+</div>
+                <div class="hero-stat-label">Partner Companies</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">50+</div>
+                <div class="hero-stat-label">Active Members</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number">10+</div>
+                <div class="hero-stat-label">Projects Delivered</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="about">
+    <div class="section-inner">
+        <div class="about-grid reveal">
+            <div class="about-text">
+                <div class="section-label">About PMP</div>
+                <h2 class="section-title">Why Join Project<br>Management at Purdue?</h2>
+                <p style="margin-top:1.5rem;">
+                    PMP bridges the gap between classroom theory and industry practice. As a member, you'll work directly with Fortune 500 companies and local organizations to deliver real consulting projects — building a portfolio that sets you apart before graduation.
+                </p>
+                <p>
+                    Whether you're pursuing a CAPM certification, sharpening your leadership abilities, or exploring project management as a career, PMP gives you the tools, mentors, and hands-on experience to succeed.
+                </p>
+            </div>
+            <div class="about-image-wrap">
+                <!-- Replace src with actual PMP team/event photo -->
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=450&fit=crop" alt="Team collaboration">
+                <div class="about-image-accent"></div>
+            </div>
+        </div>
+
+        <div class="features-row reveal">
+            <div class="feature-card">
+                <div class="feature-icon">&#128218;</div>
+                <h3>Industry Methods &amp; Skills</h3>
+                <p>Work on live projects using the same methodologies, tools, and frameworks that professional project managers use every day.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#127891;</div>
+                <h3>Professional Development</h3>
+                <p>Attend speaker events with industry leaders and gain insights into the breadth of careers available in project management.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128203;</div>
+                <h3>Professional Certificates</h3>
+                <p>Work toward Google Project Management or CAPM certifications with club resources, study groups, and peer support.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--
+    TO ADD a project card:    Copy a <div class="project-card">...</div> block below.
+    TO REMOVE a project card: Delete the entire <div class="project-card">...</div> block.
+    TO ADD a company tag:     Add <span class="company-tag">Name</span> inside company-tags.
+    TO USE a real photo:      Replace <div class="project-card-image-placeholder">...</div>
+                              with <img src="../../images/photo.jpg" class="project-card-image">
+-->
+<section id="projects">
+    <div class="section-inner">
+        <div class="projects-header reveal">
+            <div>
+                <div class="section-label">Our Work</div>
+                <h2 class="section-title">Projects &amp; Partners</h2>
+                <p class="section-subtitle">Snapshots from projects we've delivered and companies we've collaborated with.</p>
+            </div>
+        </div>
+
+        <div class="company-tags reveal">
+            <span class="company-tag">DSB</span>
+            <span class="company-tag">City Bus</span>
+            <span class="company-tag">PepsiCo</span>
+            <span class="company-tag">SC Johnson</span>
+            <span class="company-tag">Rolls-Royce</span>
+        </div>
+
+        <div class="projects-grid reveal">
+            <div class="project-card">
+                <div class="project-card-image-placeholder">&#127915;</div>
+                <div class="project-card-body">
+                    <div class="project-card-tag">Client Project</div>
+                    <h3>PepsiCo Supply Chain Analysis</h3>
+                    <p>Delivered process improvement recommendations to PepsiCo's supply chain team, identifying key bottlenecks and efficiency gains.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-card-image-placeholder">&#128666;</div>
+                <div class="project-card-body">
+                    <div class="project-card-tag">Community Partner</div>
+                    <h3>City Bus Route Optimization</h3>
+                    <p>Partnered with City Bus to analyze rider data and propose route adjustments that improved coverage and reduced wait times.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-card-image-placeholder">&#9992;&#65039;</div>
+                <div class="project-card-body">
+                    <div class="project-card-tag">Industry Partner</div>
+                    <h3>Rolls-Royce Process Mapping</h3>
+                    <p>Collaborated with Rolls-Royce engineers to document and streamline internal project handoff procedures.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-card-image-placeholder">&#127908;</div>
+                <div class="project-card-body">
+                    <div class="project-card-tag">Speaker Event</div>
+                    <h3>Industry Speaker Series</h3>
+                    <p>Hosted speakers from top companies to share career insights, project management best practices, and industry trends.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-card-image-placeholder">&#128736;&#65039;</div>
+                <div class="project-card-body">
+                    <div class="project-card-tag">Client Project</div>
+                    <h3>SC Johnson Product Launch</h3>
+                    <p>Supported SC Johnson's new product launch with market research, timeline planning, and cross-functional coordination.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-card-image-placeholder">&#127979;</div>
+                <div class="project-card-body">
+                    <div class="project-card-tag">Campus Initiative</div>
+                    <h3>DSB Campus Project</h3>
+                    <p>Worked with DSB to develop recommendations and deliverables that improved operational workflows on campus.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--
+    TO OPEN/CLOSE RECRUITMENT:  Change "status-open" to "status-closed" (or vice versa).
+    TO ADD a form link:         Copy a <a class="form-link-card">...</a> block into form-links.
+    TO REMOVE a form link:      Delete the entire <a class="form-link-card">...</a> block.
+    TO UPDATE a URL:            Change the href="..." value on the form-link-card.
+-->
+<section id="recruitment">
+    <div class="section-inner">
+        <div class="reveal">
+            <div class="section-label">Join Us</div>
+            <h2 class="section-title">Recruitment</h2>
+        </div>
+
+        <div class="recruitment-layout reveal">
+            <div class="recruitment-info">
+                <div class="recruitment-status status-open">
+                    <div class="status-dot"></div>
+                    <span>Applications Open</span>
+                </div>
+
+                <h3>Ready to build real-world experience?</h3>
+                <p>
+                    If you're excited about project management and want hands-on experience working with professionals, we'd love for you to apply. Let us know why you're interested and what you hope to learn.
+                </p>
+
+                <div class="form-links">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSes7mAKvKAK6qG4XwSIcrpsNpbq6r_DXrDkUd0e-OwjyXSyzA/viewform" target="_blank" rel="noopener" class="form-link-card">
+                        <div class="form-link-card-info">
+                            <h4>Membership Application</h4>
+                            <p>Apply to become a PMP member</p>
+                        </div>
+                        <span class="form-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeq0HY1aiHdBG8VKOtSCKMITbW9NvxsLdG-gTJoAEJinmCbjA/viewform" target="_blank" rel="noopener" class="form-link-card">
+                        <div class="form-link-card-info">
+                            <h4>Interest Form</h4>
+                            <p>Let us know you're interested in PMP</p>
+                        </div>
+                        <span class="form-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="recruitment-sidebar">
+                <h3>Recruitment Timeline</h3>
+                <p>We recruit new members every fall and spring semester. Check back here for updated dates and application links.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Callout Events</h4>
+                        <p>Attend a callout to learn about PMP</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Application Period</h4>
+                        <p>Submit your application online</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Interviews</h4>
+                        <p>Meet with the executive team</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Welcome Aboard</h4>
+                        <p>Join your project team and get started</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="contact">
+    <div class="section-inner">
+        <div class="contact-grid">
+            <div class="reveal">
+                <div class="section-label">Get in Touch</div>
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Whether you're a student interested in joining, an industry professional looking to partner, or just curious about what we do — we'd love to hear from you.</p>
+
+                <div class="contact-methods">
+                    <a href="mailto:projectmanagementpurdue@gmail.com" class="contact-method">
+                        <div class="contact-method-icon">&#9993;</div>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>projectmanagementpurdue@gmail.com</p>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/company/project-management-at-purdue/" target="_blank" rel="noopener" class="contact-method">
+                        <div class="contact-method-icon">&#128101;</div>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <p>Follow us on LinkedIn</p>
+                        </div>
+                    </a>
+                    <a href="https://www.instagram.com/pmp_purdue/" target="_blank" rel="noopener" class="contact-method">
+                        <div class="contact-method-icon">&#128247;</div>
+                        <div>
+                            <h4>Instagram</h4>
+                            <p>@pmp_purdue</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-form reveal">
+                <h3>Send a Message</h3>
+                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">I am a...</label>
+                        <select id="role" name="role">
+                            <option value="student">Purdue Student</option>
+                            <option value="industry">Industry Professional</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message &rarr;</button>
+                    <div class="form-success" id="formSuccess">
+                        &#10003; Thanks for reaching out! We'll get back to you soon.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo" style="margin-bottom:0;">
+                    <div class="nav-logo-mark">PMP</div>
+                    <span class="nav-logo-text">Project Management at Purdue</span>
+                </a>
+                <p>Cultivating essential project management skills and showcasing the diverse career paths available within the field.</p>
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/company/project-management-at-purdue/" target="_blank" rel="noopener" class="footer-social" aria-label="LinkedIn">in</a>
+                    <a href="https://www.instagram.com/pmp_purdue/" target="_blank" rel="noopener" class="footer-social" aria-label="Instagram">&#9679;</a>
+                    <a href="mailto:projectmanagementpurdue@gmail.com" class="footer-social" aria-label="Email">@</a>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Navigation</h4>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#recruitment">Recruitment</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Quick Links</h4>
+                <a href="mailto:projectmanagementpurdue@gmail.com">Email PMP</a>
+                <a href="https://www.linkedin.com/company/project-management-at-purdue/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://boilerlink.purdue.edu/" target="_blank" rel="noopener">Boiler Link</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025 Project Management at Purdue. All rights reserved.</span>
+            <span>Purdue University, West Lafayette, IN</span>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    // ── Nav scroll effect ──
+window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ── Mobile menu ──
+function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileMenu(e) {
+    if (e.target === e.currentTarget) toggleMobileMenu();
+}
+
+// ── Scroll reveal ──
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Contact form (mailto fallback) ──
+function handleContactSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const email = form.email.value;
+    const role = form.role.value;
+    const message = form.message.value;
+
+    const subject = encodeURIComponent(`Website Inquiry from ${firstName} ${lastName}`);
+    const body = encodeURIComponent(
+        `Name: ${firstName} ${lastName}\nEmail: ${email}\nRole: ${role}\n\nMessage:\n${message}`
+    );
+
+    window.location.href = `mailto:projectmanagementpurdue@gmail.com?subject=${subject}&body=${body}`;
+
+    document.getElementById('formSuccess').style.display = 'block';
+    form.reset();
+    setTimeout(() => {
+        document.getElementById('formSuccess').style.display = 'none';
+    }, 5000);
+}
+
+</script>
+
+</body>
+</html>

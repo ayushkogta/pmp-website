@@ -17,11 +17,11 @@ export function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <div className="h-14 w-44 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-lg flex items-center justify-center shadow-lg">
-              <span className="text-black font-bold text-xs text-center px-2 tracking-wide">
-                PROJECT MANAGEMENT<br/>AT PURDUE
-              </span>
-            </div>
+            <ImageWithFallback
+              src="/assets/logo.png"
+              alt="Project Management at Purdue Logo"
+              className="h-14 w-auto"
+            />
           </Link>
 
           {/* Navigation */}

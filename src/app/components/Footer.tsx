@@ -13,13 +13,13 @@ export function Footer() {
     { 
       name: 'Instagram', 
       icon: Instagram, 
-      href: 'https://instagram.com',
+      href: 'https://www.instagram.com/projectmanagementpurdue/',
       ariaLabel: 'Follow us on Instagram'
     },
     { 
       name: 'LinkedIn', 
       icon: Linkedin, 
-      href: 'https://linkedin.com',
+      href: 'https://www.linkedin.com/company/project-management-at-purdue/',
       ariaLabel: 'Connect with us on LinkedIn'
     },
     { 

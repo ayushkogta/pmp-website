@@ -7,18 +7,21 @@ export function Projects() {
       title: 'Innovative Footwear Design',
       description: 'Our team spent a semester conceptualizing and designing a revolutionary new shoe concept. We explored sustainable materials, ergonomic design principles, and cutting-edge manufacturing techniques to create a next-generation athletic footwear solution.',
       skills: ['Product Design', 'Market Research', 'Sustainability Analysis', 'Prototyping'],
+      imageUrl: 'assets/nike-showcase.png',
     },
     {
       company: 'Apple',
       title: 'Next-Gen Product Development',
       description: 'Working on conceptual products for Apple\'s ecosystem, including innovative accessories and features for Macs, AirPods, and iPhones. Our focus is on enhancing user experience through seamless integration and thoughtful design.',
       skills: ['UX Design', 'Product Strategy', 'Innovation Management', 'User Research'],
+      imageUrl: 'assets/placeholder.png',
     },
     {
       company: 'Rolls-Royce',
       title: 'Engineering Excellence Initiative',
       description: 'Collaborating on a project focused on precision engineering and luxury innovation. Our team applies project management methodologies to conceptualize improvements in manufacturing processes and product excellence.',
       skills: ['Process Optimization', 'Quality Management', 'Technical Documentation', 'Stakeholder Management'],
+      imageUrl: 'assets/placeholder.png',
     },
   ];
 
@@ -87,7 +90,7 @@ export function Projects() {
                 <div className={index % 2 === 1 ? 'md:order-1' : ''}>
                   <div className="rounded-lg overflow-hidden shadow-xl">
                     <ImageWithFallback
-                      src="https://images.unsplash.com/photo-1758923530651-5183fa706d18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbm5vdmF0aW9uJTIwcHJvZHVjdCUyMGRlc2lnbnxlbnwxfHx8fDE3NzMxNTc0NzV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                      src={project.imageUrl}
                       alt={`${project.company} project`}
                       className="w-full h-96 object-cover"
                     />

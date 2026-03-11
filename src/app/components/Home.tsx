@@ -21,9 +21,9 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Executive Board Photo */}
-            <div className="rounded-lg overflow-hidden shadow-2xl h-80">
+            <div className="rounded-lg overflow-hidden shadow-2xl h-[500px] w-[300px] mx-auto">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1759699282669-c77bbefb336d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzdHVkZW50JTIwZ3JvdXAlMjB0ZWFtJTIwcGhvdG8lMjBzdGFpcnN8ZW58MXx8fHwxNzczMTU3ODE4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="/assets/exec-board.jpg"
                 alt="Executive Board Team Photo"
                 className="w-full h-full object-cover"
               />
@@ -130,7 +130,7 @@ export function Home() {
             </div>
             <div className="rounded-lg overflow-hidden shadow-2xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1758923530651-5183fa706d18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbm5vdmF0aW9uJTIwcHJvZHVjdCUyMGRlc2lnbnxlbnwxfHx8fDE3NzMxNTc0NzV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="/assets/temp-our-projects.png"
                 alt="Innovation projects"
                 className="w-full h-96 object-cover"
               />

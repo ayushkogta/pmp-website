@@ -3,23 +3,44 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function People() {
   const executiveBoard = [
-    { name: 'Matthew Brigham', role: 'President' },
-    { name: 'Brayden Waddle', role: 'Director of Talent' },
-    { name: 'Anneliese Lu', role: 'Director of MarCom' },
-    { name: 'Jarrett Evans', role: 'Director of Finance' },
-    { name: 'Ani Ashok', role: 'Director of Project Excellence' },
-    { name: 'Colin Gupta', role: 'Director of Project Excellence, Chair' },
-    { name: 'Cole Miller', role: 'Director of Talent, Chair' },
+    { 
+      name: 'Matthew Brigham', 
+      role: 'President',
+      imageUrl: 'assets/matthew.png'
+    },
+    { 
+      name: 'Brayden Waddle', 
+      role: 'Director of Talent',
+      imageUrl: 'assets/brayden.png'
+    },
+    { 
+      name: 'Anneliese Lu', 
+      role: 'Director of MarCom',
+      imageUrl: 'assets/anneliese.png'
+    },
+    { 
+      name: 'Jarrett Evans', 
+      role: 'Director of Finance',
+      imageUrl: 'assets/jarrett.png'
+    },
+    { 
+      name: 'Ani Ashok', 
+      role: 'Director of Project Excellence',
+      imageUrl: 'assets/ani.png'
+    },
+    { 
+      name: 'Colin Gupta', 
+      role: 'Director of Project Excellence, Chair',
+      imageUrl: 'assets/colin.png'
+    },
+    { 
+      name: 'Cole Miller', 
+      role: 'Director of Talent, Chair',
+      imageUrl: 'assets/cole.png'
+    },
   ];
 
-  const alumniCompanies = [
-    { name: 'Deloitte', imageUrl: 'https://images.unsplash.com/photo-1763933356190-6e86bb9faad8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZWxvaXR0ZSUyMGNvbnN1bHRpbmclMjBvZmZpY2V8ZW58MXx8fHwxNzczMTU4ODY4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
-    { name: 'Google', imageUrl: 'https://images.unsplash.com/photo-1592096304832-62463bfdc822?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb29nbGUlMjB0ZWNoJTIwb2ZmaWNlfGVufDF8fHx8MTc3MzE1ODg2OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
-    { name: 'Microsoft', imageUrl: 'https://images.unsplash.com/photo-1768006273705-760cf15058e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaWNyb3NvZnQlMjBoZWFkcXVhcnRlcnMlMjBidWlsZGluZ3xlbnwxfHx8fDE3NzMxNTg4NzB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
-    { name: 'Amazon', imageUrl: 'https://images.unsplash.com/photo-1761866299864-3fb0de4d255a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhbWF6b24lMjBvZmZpY2UlMjBoZWFkcXVhcnRlcnN8ZW58MXx8fHwxNzczMTU4ODcwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
-    { name: 'BCG', imageUrl: 'https://images.unsplash.com/photo-1723325650065-dc04e697980c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib3N0b24lMjBjb25zdWx0aW5nJTIwZ3JvdXAlMjBvZmZpY2V8ZW58MXx8fHwxNzczMTU4ODcyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
-    { name: 'Apple', imageUrl: 'https://images.unsplash.com/photo-1679010936793-d8b99fa292bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcHBsZSUyMGhlYWRxdWFydGVycyUyMGN1cGVydGlub3xlbnwxfHx8fDE3NzMxNTg4NzN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
-  ];
+  const alumniImage = 'assets/alumni-companies.png';
 
   return (
     <div className="bg-white">
@@ -40,15 +61,19 @@ export function People() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-gray-900 mb-16">2026 Executive Board</h2>
           
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {executiveBoard.map((member) => (
               <div
                 key={member.name}
-                className="group"
+                className="group w-56"
               >
-                {/* Profile Picture Placeholder */}
-                <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 aspect-square rounded-lg mb-4 flex items-center justify-center overflow-hidden shadow-lg transition-transform group-hover:scale-105">
-                  <User className="w-20 h-20 text-black opacity-30" />
+                {/* Profile Picture */}
+                <div className="aspect-square rounded-lg mb-4 overflow-hidden shadow-lg transition-transform group-hover:scale-105">
+                  <ImageWithFallback
+                    src={member.imageUrl}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 
                 {/* Member Info */}
@@ -69,19 +94,12 @@ export function People() {
             Where Our Alumni Work
           </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-            {alumniCompanies.map((company) => (
-              <div
-                key={company.name}
-                className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow aspect-video"
-              >
-                <ImageWithFallback
-                  src={company.imageUrl}
-                  alt={company.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
+          <div className="flex justify-center">
+            <ImageWithFallback
+              src={alumniImage}
+              alt="Where Our Alumni Work"
+              className="w-full max-w-4xl rounded-lg shadow-lg"
+            />
           </div>
         </div>
       </section>

@@ -7,7 +7,7 @@ export function Home() {
       {/* Hero Section - Black background with large text */}
       <section className="bg-black text-white py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 tracking-tight">
             Project Management at Purdue
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl">
@@ -132,7 +132,7 @@ export function Home() {
               <ImageWithFallback
                 src="/assets/temp-our-projects.png"
                 alt="Innovation projects"
-                className="w-full h-96 object-cover"
+                className="w-full h-auto object-contain"
               />
             </div>
           </div>

@@ -1,27 +1,177 @@
+import { useState, useCallback, useEffect } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+
+interface ImageCarouselProps {
+  images: { src: string; alt: string }[];
+  onImageClick: (index: number) => void;
+}
+
+function ImageCarousel({ images, onImageClick }: ImageCarouselProps) {
+  const [current, setCurrent] = useState(0);
+
+  const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+
+  return (
+    <div className="relative group">
+      <div
+        className="rounded-lg overflow-hidden shadow-xl cursor-pointer"
+        onClick={() => onImageClick(current)}
+      >
+        <ImageWithFallback
+          src={images[current].src}
+          alt={images[current].alt}
+          className="w-full h-auto object-contain"
+        />
+      </div>
+
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Dots */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  i === current ? 'bg-yellow-500' : 'bg-white/50'
+                }`}
+                aria-label={`Go to image ${i + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+interface LightboxProps {
+  images: { src: string; alt: string }[];
+  startIndex: number;
+  onClose: () => void;
+}
+
+function Lightbox({ images, startIndex, onClose }: LightboxProps) {
+  const [current, setCurrent] = useState(startIndex);
+
+  const prev = useCallback(() => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1)), [images.length]);
+  const next = useCallback(() => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1)), [images.length]);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    };
+    window.addEventListener('keydown', handleKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose, prev, next]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-white/70 hover:text-white z-10"
+        aria-label="Close"
+      >
+        <X className="w-8 h-8" />
+      </button>
+
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 z-10"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 z-10"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </>
+      )}
+
+      <div className="max-w-5xl max-h-[90vh] px-4" onClick={(e) => e.stopPropagation()}>
+        <img
+          src={images[current].src}
+          alt={images[current].alt}
+          className="max-w-full max-h-[85vh] object-contain mx-auto rounded-lg"
+        />
+        {images.length > 1 && (
+          <p className="text-center text-white/60 text-sm mt-3">
+            {current + 1} / {images.length}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export function Projects() {
+  const [lightbox, setLightbox] = useState<{ images: { src: string; alt: string }[]; index: number } | null>(null);
+
   const projects = [
     {
       company: 'Nike',
       title: 'Innovative Footwear Design',
       description: 'Our team spent a semester conceptualizing and designing a revolutionary new shoe concept. We explored sustainable materials, ergonomic design principles, and cutting-edge manufacturing techniques to create a next-generation athletic footwear solution.',
       skills: ['Product Design', 'Market Research', 'Sustainability Analysis', 'Prototyping'],
-      imageUrl: 'assets/nike-showcase.png',
+      images: [
+        { src: 'assets/nike-showcase.png', alt: 'Nike project showcase' },
+        { src: 'assets/placeholder.png', alt: 'Nike project image 2' },
+        { src: 'assets/placeholder.png', alt: 'Nike project image 3' },
+      ],
     },
     {
       company: 'Apple',
       title: 'Next-Gen Product Development',
       description: 'Working on conceptual products for Apple\'s ecosystem, including innovative accessories and features for Macs, AirPods, and iPhones. Our focus is on enhancing user experience through seamless integration and thoughtful design.',
       skills: ['UX Design', 'Product Strategy', 'Innovation Management', 'User Research'],
-      imageUrl: 'assets/placeholder.png',
+      images: [
+        { src: 'assets/placeholder.png', alt: 'Apple project image 1' },
+        { src: 'assets/placeholder.png', alt: 'Apple project image 2' },
+        { src: 'assets/placeholder.png', alt: 'Apple project image 3' },
+      ],
     },
     {
       company: 'Rolls-Royce',
       title: 'Engineering Excellence Initiative',
       description: 'Collaborating on a project focused on precision engineering and luxury innovation. Our team applies project management methodologies to conceptualize improvements in manufacturing processes and product excellence.',
       skills: ['Process Optimization', 'Quality Management', 'Technical Documentation', 'Stakeholder Management'],
-      imageUrl: 'assets/placeholder.png',
+      images: [
+        { src: 'assets/placeholder.png', alt: 'Rolls-Royce project image 1' },
+        { src: 'assets/placeholder.png', alt: 'Rolls-Royce project image 2' },
+        { src: 'assets/placeholder.png', alt: 'Rolls-Royce project image 3' },
+      ],
     },
   ];
 
@@ -30,7 +180,7 @@ export function Projects() {
       {/* Hero Section */}
       <section className="bg-black text-white py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 tracking-tight">
             Our Projects
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl">
@@ -86,15 +236,12 @@ export function Projects() {
                   </div>
                 </div>
 
-                {/* Image */}
+                {/* Image Carousel */}
                 <div className={index % 2 === 1 ? 'md:order-1' : ''}>
-                  <div className="rounded-lg overflow-hidden shadow-xl">
-                    <ImageWithFallback
-                      src={project.imageUrl}
-                      alt={`${project.company} project`}
-                      className="w-full h-96 object-cover"
-                    />
-                  </div>
+                  <ImageCarousel
+                    images={project.images}
+                    onImageClick={(imgIndex) => setLightbox({ images: project.images, index: imgIndex })}
+                  />
                 </div>
               </div>
             ))}
@@ -118,6 +265,15 @@ export function Projects() {
           </a>
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <Lightbox
+          images={lightbox.images}
+          startIndex={lightbox.index}
+          onClose={() => setLightbox(null)}
+        />
+      )}
     </div>
   );
 }

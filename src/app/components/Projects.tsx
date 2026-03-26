@@ -157,9 +157,13 @@ export function Projects() {
       description: 'Working on conceptual products for Apple\'s ecosystem, including innovative accessories and features for Macs, AirPods, and iPhones. Our focus is on enhancing user experience through seamless integration and thoughtful design.',
       skills: ['UX Design', 'Product Strategy', 'Innovation Management', 'User Research'],
       images: [
-        { src: 'assets/placeholder.png', alt: 'Apple project image 1' },
-        { src: 'assets/placeholder.png', alt: 'Apple project image 2' },
-        { src: 'assets/placeholder.png', alt: 'Apple project image 3' },
+        { src: 'assets/apple-photos/team1.JPG', alt: 'Apple project image 1' },
+        { src: 'assets/apple-photos/team2.JPG', alt: 'Apple project image 2' },
+        { src: 'assets/apple-photos/team3.JPG', alt: 'Apple project image 3' },
+        { src: 'assets/apple-photos/pres1.JPG', alt: 'Apple project image 3' },
+        { src: 'assets/apple-photos/pres4.JPG', alt: 'Apple project image 3' },
+        { src: 'assets/apple-photos/pres2.JPG', alt: 'Apple project image 3' },
+        { src: 'assets/apple-photos/pres3.JPG', alt: 'Apple project image 3' }
       ],
     },
     {

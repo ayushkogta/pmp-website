@@ -1,7 +1,6 @@
 
   # PMP Website Prototype
 
-  This is a code bundle for PMP Website Prototype. The original project is available at https://www.figma.com/design/jsxdWsohcJAuirdrGbD9Sn/PMP-Website-Prototype.
 
   ## Running the code
 

@@ -4,35 +4,31 @@ export function Apply() {
   const timeline = [
     {
       title: 'Application Deadline',
-      date: 'Friday, January 23rd @ 11:59 p.m.',
+      date: '',
       description: 'Apply through our online application, linked below. The application requires responses to several short essay questions and a resume submission.',
       icon: FileText,
-      cta: { text: 'Apply Here', href: '#' }
+      cta: { text: 'Check here for any updates!',
+             href: 'https://www.instagram.com/projectmanagementpurdue/',
+             target: '_blank',
+             rel: 'noopener noreferrer' }
     },
     {
       title: 'Application Decisions',
-      date: 'Saturday, January 24th - Sunday, January 25th',
-      description: 'Decisions on applicants will be sent on a rolling basis.',
+      date: '',
+      description: 'Decisions on applicants will be sent on a rolling basis, as well as instructions for what to do next.',
       icon: Calendar,
     },
     {
-      title: 'Club Callout #1',
-      date: 'Wednesday, January 14th @ 7:00 PM',
-      location: 'KRAN G016',
-      description: 'Come and hear about the club, meet our members, and get more information on our application process!',
-      icon: Users,
-    },
-    {
-      title: 'Club Callout #2',
-      date: 'Thursday, January 22nd @ 7:00 PM',
-      location: 'LILLY G126',
+      title: 'Club Callouts #1 and #2',
+      date: '',
+      location: '',
       description: 'Come and hear about the club, meet our members, and get more information on our application process!',
       icon: Users,
     },
     {
       title: 'Interviews',
-      date: 'Monday, January 26th - Wednesday, January 28th',
-      description: 'After reviewing applications, some applicants will be invited back for an interview. Interviews will be conducted in person. They involve some behavioral questions as well as case-style questions. See our Interviews page for more details, tips & tricks.',
+      date: '',
+      description: 'After reviewing applications, some applicants will be invited back for an interview. Interviews will be conducted in person. They involve mainly behavioral questions.',
       icon: Video,
     },
   ];
@@ -46,7 +42,7 @@ export function Apply() {
             Join Us
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light">
-            Start your journey in project management
+            Start your journey in Project Management
           </p>
         </div>
       </section>
@@ -99,6 +95,8 @@ export function Apply() {
                   {item.cta && (
                     <a
                       href={item.cta.href}
+                      target={item.cta.target}
+                      rel={item.cta.rel}
                       className="inline-block bg-black text-white px-8 py-3 rounded-md hover:bg-gray-800 transition-colors font-medium"
                     >
                       {item.cta.text}

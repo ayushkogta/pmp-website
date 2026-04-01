@@ -88,10 +88,10 @@ export function Home() {
                 <Users className="w-8 h-8 text-black" />
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                Professional Development with PMI
+                Professional Development
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Network with professionals and develop skills through our partnership with the Project Management Institute.
+                Network with professionals through our regular panel events and develop skills through collaboration with others.
               </p>
             </div>
 
@@ -100,10 +100,10 @@ export function Home() {
                 <Award className="w-8 h-8 text-black" />
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                Resources for PM Certificates
+                Creative Collaboration
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Access study materials and preparation resources for project management certifications.
+                Participate in collaborative projects, share ideas, and present creative work in a supportive, professional environment.
               </p>
             </div>
           </div>
@@ -117,7 +117,7 @@ export function Home() {
             <div>
               <h2 className="text-4xl font-bold mb-6">Our Projects</h2>
               <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                We work on innovative concept projects with companies like Nike, Apple, and Rolls-Royce. 
+                We work on innovative concept projects for companies like Nike, Apple, and Rolls-Royce. 
                 From designing next-generation footwear to creating revolutionary product concepts, 
                 our members gain invaluable project management experience.
               </p>

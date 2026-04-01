@@ -143,7 +143,7 @@ export function Projects() {
     {
       company: 'Nike',
       title: 'Innovative Footwear Design',
-      description: 'Our team spent a semester conceptualizing and designing a revolutionary new shoe concept. We explored sustainable materials, ergonomic design principles, and cutting-edge manufacturing techniques to create a next-generation athletic footwear solution.',
+      description: 'We developed new shoe concepts over the course of a semester. In order to develop a next-generation athletic footwear solution, we investigated sustainable materials, ergonomic design concepts, and state-of-the-art production procedures.',
       skills: ['Product Design', 'Market Research', 'Sustainability Analysis', 'Prototyping'],
       images: [
         { src: 'assets/nike-showcase.png', alt: 'Nike project showcase' },
@@ -154,7 +154,7 @@ export function Projects() {
     {
       company: 'Apple',
       title: 'Next-Gen Product Development',
-      description: 'Working on conceptual products for Apple\'s ecosystem, including innovative accessories and features for Macs, AirPods, and iPhones. Our focus is on enhancing user experience through seamless integration and thoughtful design.',
+      description: 'Working on conceptual products for Apple\'s ecosystem, including innovative accessories and features for Macs, AirPods, and iPhones. Our goal is to improve user experience by intelligent design and smooth integration.',
       skills: ['UX Design', 'Product Strategy', 'Innovation Management', 'User Research'],
       images: [
         { src: 'assets/apple-photos/team1.JPG', alt: 'Apple project image 1' },
@@ -169,7 +169,7 @@ export function Projects() {
     {
       company: 'Rolls-Royce',
       title: 'Engineering Excellence Initiative',
-      description: 'Collaborating on a project focused on precision engineering and luxury innovation. Our team applies project management methodologies to conceptualize improvements in manufacturing processes and product excellence.',
+      description: 'We worked on a project that emphasises premium innovation and precision engineering. Our club used project management techniques to develop ideas for better manufacturing procedures and product excellence.',
       skills: ['Process Optimization', 'Quality Management', 'Technical Documentation', 'Stakeholder Management'],
       images: [
         { src: 'assets/placeholder.png', alt: 'Rolls-Royce project image 1' },
@@ -188,7 +188,7 @@ export function Projects() {
             Our Projects
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl">
-            Real-world project management experience through conceptual collaborations with industry leaders
+            Real-world Project Management experience through conceptual collaborations with industry leaders
           </p>
         </div>
       </section>
@@ -262,7 +262,9 @@ export function Projects() {
             Develop your skills, build your resume, and make an impact.
           </p>
           <a
-            href="mailto:contact@pmppurdue.org"
+            href="https://www.instagram.com/projectmanagementpurdue/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-yellow-500 text-black px-8 py-3 rounded-md hover:bg-yellow-400 transition-colors font-medium"
           >
             Join Us Today

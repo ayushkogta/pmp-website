@@ -40,7 +40,7 @@ export function People() {
     },
   ];
 
-  const alumniImage = 'assets/alumni-companies.png';
+  const alumniImage = 'assets/alumni-companies.jpg';
 
   return (
     <div className="bg-white">
@@ -97,7 +97,7 @@ export function People() {
           <div className="flex justify-center">
             <ImageWithFallback
               src={alumniImage}
-              alt="Where Our Alumni Work"
+              alt="Where Our Alumni Have Worked"
               className="w-full max-w-4xl rounded-lg shadow-lg"
             />
           </div>
@@ -114,7 +114,7 @@ export function People() {
             there's a place for you in our organization.
           </p>
           <a
-            href="mailto:contact@pmppurdue.org"
+            href="mailto:projectmanagementpurdue@gmail.com"
             className="inline-block bg-yellow-500 text-black px-8 py-3 rounded-md hover:bg-yellow-400 transition-colors font-medium"
           >
             Get in Touch

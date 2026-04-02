@@ -25,7 +25,7 @@ export function Footer() {
     { 
       name: 'Email', 
       icon: Mail, 
-      href: 'mailto:contact@pmppurdue.org',
+      href: 'mailto:projectmanagementpurdue@gmail.com',
       ariaLabel: 'Send us an email'
     },
   ];

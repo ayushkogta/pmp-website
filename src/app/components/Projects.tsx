@@ -147,8 +147,8 @@ export function Projects() {
       skills: ['Product Design', 'Market Research', 'Sustainability Analysis', 'Prototyping'],
       images: [
         { src: 'assets/nike-showcase.png', alt: 'Nike project showcase' },
-        { src: 'assets/placeholder.png', alt: 'Nike project image 2' },
-        { src: 'assets/placeholder.png', alt: 'Nike project image 3' },
+        { src: 'assets/nike-2.jpg', alt: 'Nike project image 2' },
+        { src: 'assets/nike-3.jpg', alt: 'Nike project image 3' },
       ],
     },
     {
@@ -172,9 +172,8 @@ export function Projects() {
       description: 'We worked on a project that emphasises premium innovation and precision engineering. Our club used project management techniques to develop ideas for better manufacturing procedures and product excellence.',
       skills: ['Process Optimization', 'Quality Management', 'Technical Documentation', 'Stakeholder Management'],
       images: [
-        { src: 'assets/placeholder.png', alt: 'Rolls-Royce project image 1' },
-        { src: 'assets/placeholder.png', alt: 'Rolls-Royce project image 2' },
-        { src: 'assets/placeholder.png', alt: 'Rolls-Royce project image 3' },
+        { src: 'assets/rolls-royce-1.png', alt: 'Rolls-Royce project image 1' },
+        { src: 'assets/rolls-royce-2.png', alt: 'Rolls-Royce project image 2' },
       ],
     },
   ];
